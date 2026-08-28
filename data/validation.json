@@ -1,0 +1,165 @@
+{
+  "development": {
+    "total": 400,
+    "entered": 390,
+    "accepted": 229,
+    "acceptance_rate": 0.5871794871794872,
+    "acceptance_95ci": [
+      0.5376974099179014,
+      0.634960898335417
+    ],
+    "pvmq_mean": 0.4747909359413587,
+    "pvmq_sd": 0.2179253550702171,
+    "pvmq_median": 0.411793302388545,
+    "q1": 0.3063846482286433,
+    "q3": 0.6459707000923208,
+    "min": 0.1299480769924201,
+    "max": 0.997814136735788,
+    "pvmq_gt1": 0
+  },
+  "locked": {
+    "total": 100,
+    "muscle_complete": 98,
+    "entered": 98,
+    "accepted": 68,
+    "acceptance_rate": 0.6938775510204082,
+    "acceptance_95ci": [
+      0.5967555815878501,
+      0.7763734018343552
+    ],
+    "pvmq_mean": 0.45246528029533634,
+    "pvmq_sd": 0.19986966612971918,
+    "pvmq_median": 0.40715761628831876,
+    "q1": 0.3178833442811919,
+    "q3": 0.5593989447533665,
+    "min": 0.1676712192898302,
+    "max": 0.9856324327167444,
+    "pvmq_gt1": 0
+  },
+  "comparisons": {
+    "acceptance_absolute_difference_locked_minus_development": 0.10669806384092095,
+    "acceptance_difference_95ci": [
+      -0.0015412090618048269,
+      0.2028959919456289
+    ],
+    "fisher_exact_odds_ratio_dev_vs_locked": 0.6275118743149434,
+    "fisher_exact_p": 0.0637202950165022,
+    "welch_t_p": 0.4300144600437806,
+    "mann_whitney_p": 0.5839977892950385,
+    "ks_p": 0.5930353130814048,
+    "hedges_g_locked_minus_dev": -0.10408029355880605,
+    "tier_distribution_chi2_p": 0.23630975096641793
+  },
+  "scanner": [
+    {
+      "cohort": "Development",
+      "scanner": "GE 1.5T",
+      "entered": 130,
+      "accepted": 92,
+      "acceptance_rate": 0.7076923076923077,
+      "acceptance_ci_low": 0.6244469876657346,
+      "acceptance_ci_high": 0.779015440761194,
+      "pvmq_mean": 0.5263013828302284,
+      "pvmq_sd": 0.19771942479090576,
+      "pvmq_median": 0.48502323289191746
+    },
+    {
+      "cohort": "Development",
+      "scanner": "Philips 1.5T",
+      "entered": 160,
+      "accepted": 70,
+      "acceptance_rate": 0.4375,
+      "acceptance_ci_low": 0.3629909872161968,
+      "acceptance_ci_high": 0.5149397871802415,
+      "pvmq_mean": 0.45260873531784446,
+      "pvmq_sd": 0.22989672895948424,
+      "pvmq_median": 0.39023587617573496
+    },
+    {
+      "cohort": "Development",
+      "scanner": "Philips 3T",
+      "entered": 100,
+      "accepted": 67,
+      "acceptance_rate": 0.67,
+      "acceptance_ci_low": 0.5730534379509052,
+      "acceptance_ci_high": 0.7543687726587197,
+      "pvmq_mean": 0.4272356065364333,
+      "pvmq_sd": 0.2199758618093278,
+      "pvmq_median": 0.3559498475643922
+    },
+    {
+      "cohort": "Locked Test",
+      "scanner": "GE 1.5T",
+      "entered": 31,
+      "accepted": 26,
+      "acceptance_rate": 0.8387096774193549,
+      "acceptance_ci_low": 0.6736564604120674,
+      "acceptance_ci_high": 0.9290737555663471,
+      "pvmq_mean": 0.5493164026257329,
+      "pvmq_sd": 0.21921951353250677,
+      "pvmq_median": 0.48538583829326915
+    },
+    {
+      "cohort": "Locked Test",
+      "scanner": "Philips 1.5T",
+      "entered": 41,
+      "accepted": 23,
+      "acceptance_rate": 0.5609756097560976,
+      "acceptance_ci_low": 0.4104052722210608,
+      "acceptance_ci_high": 0.7010986826344964,
+      "pvmq_mean": 0.4177948952556285,
+      "pvmq_sd": 0.1534174005479208,
+      "pvmq_median": 0.3959297386370486
+    },
+    {
+      "cohort": "Locked Test",
+      "scanner": "Philips 3T",
+      "entered": 26,
+      "accepted": 19,
+      "acceptance_rate": 0.7307692307692307,
+      "acceptance_ci_low": 0.5391695962082381,
+      "acceptance_ci_high": 0.8629555167798162,
+      "pvmq_mean": 0.36190157899654557,
+      "pvmq_sd": 0.17157800092305417,
+      "pvmq_median": 0.3332490321528434
+    }
+  ],
+  "logistic_acceptance": {
+    "C(Scanner)[T.Philips 1.5T]": {
+      "OR": 0.3088100694269552,
+      "CI95": [
+        0.1972364401185093,
+        0.4834991897145465
+      ],
+      "p": 2.7923220523842484e-07
+    },
+    "C(Scanner)[T.Philips 3T]": {
+      "OR": 0.7769301962600781,
+      "CI95": [
+        0.4644781734555308,
+        1.2995670504170937
+      ],
+      "p": 0.3362284388559992
+    },
+    "CohortLocked": {
+      "OR": 1.6643005095214671,
+      "CI95": [
+        1.0193344012520238,
+        2.717357701840749
+      ],
+      "p": 0.04169794689831729
+    }
+  },
+  "tier_counts": {
+    "Development": {
+      "A": 130,
+      "B": 59,
+      "C": 40
+    },
+    "Locked Test": {
+      "A": 36,
+      "B": 14,
+      "C": 18
+    }
+  }
+}
