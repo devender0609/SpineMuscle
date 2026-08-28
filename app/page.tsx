@@ -1,4 +1,4 @@
-import validation from '../data/validation.json';
+﻿import validation from '../data/validation.json';
 
 function pct(x:number){ return (x*100).toFixed(1)+'%'; }
 function f3(x:number){ return Number(x).toFixed(3); }
@@ -23,8 +23,8 @@ export default function Home(){
     <section className="grid">
       <article className="card"><span>Development acceptance</span><strong>{pct(d.acceptance_rate)}</strong><small>{d.accepted}/{d.entered} entering PVMQ stage</small></article>
       <article className="card"><span>Locked-test acceptance</span><strong>{pct(l.acceptance_rate)}</strong><small>{l.accepted}/{l.entered} entering PVMQ stage</small></article>
-      <article className="card"><span>Development median PVMQ</span><strong>{f3(d.pvmq_median)}</strong><small>IQR {f3(d.q1)}–{f3(d.q3)}</small></article>
-      <article className="card"><span>Locked median PVMQ</span><strong>{f3(l.pvmq_median)}</strong><small>IQR {f3(l.q1)}–{f3(l.q3)}</small></article>
+      <article className="card"><span>Development median PVMQ</span><strong>{f3(d.pvmq_median)}</strong><small>IQR {f3(d.q1)}â€“{f3(d.q3)}</small></article>
+      <article className="card"><span>Locked median PVMQ</span><strong>{f3(l.pvmq_median)}</strong><small>IQR {f3(l.q1)}â€“{f3(l.q3)}</small></article>
     </section>
 
     <section className="panel">
@@ -45,7 +45,7 @@ export default function Home(){
           {['GE 1.5T','Philips 1.5T','Philips 3T'].map(name=>{
             const dv=validation.scanner.find((x:any)=>x.cohort==='Development'&&x.scanner===name);
             const lk=validation.scanner.find((x:any)=>x.cohort==='Locked Test'&&x.scanner===name);
-            return <tr key={name}><td>{name}</td><td>{pct(dv.acceptance_rate)}</td><td>{pct(lk.acceptance_rate)}</td></tr>
+            return <tr key={name}><td>{name}</td><td>{dv ? pct(dv.acceptance_rate) : "—"}</td><td>{lk ? pct(lk.acceptance_rate) : "—"}</td></tr>
           })}
         </tbody></table>
         <p className="foot">Scanner-specific differences remain; scanner independence is not claimed.</p>
@@ -63,7 +63,9 @@ export default function Home(){
     <section className="panel">
       <h2>MRI inference deployment status</h2>
       <p>The frozen measurement logic is validated here against the 500-patient research dataset. Arbitrary one-upload MRI inference is intentionally not enabled in this Vercel release because the current exact lumbar-level mapping used during validation is dataset-specific and MuscleMap/dcm2niix require a containerized inference service.</p>
-      <p className="foot">Recommended production architecture: GitHub → Vercel frontend + separate containerized inference API. Add generalizable lumbar-level localization and validate it before enabling clinical-study uploads.</p>
+      <p className="foot">Recommended production architecture: GitHub â†’ Vercel frontend + separate containerized inference API. Add generalizable lumbar-level localization and validate it before enabling clinical-study uploads.</p>
     </section>
   </main>;
 }
+
+
