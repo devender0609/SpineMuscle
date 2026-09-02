@@ -1,0 +1,2 @@
+﻿PatientID,Archive,DICOM_Count,Header_Samples,Modality,Manufacturer,FieldStrength_T,SeriesDescription,ProtocolName,SequenceName,ScanningSequence,Plane,Rows,Columns,PixelSpacing_mm,SliceThickness_mm,EchoTime_ms,RepetitionTime_ms,Likely_Axial_T2,QC_Status,Proposed_Split
+0271,251-300.zip,25,3,MR,Philips Medical Systems,1.5,T2W_TSE_tra,,,SE,Axial,224,224,0.89285713434219\0.89285713434219,4,100,3693.95141601562,Yes,Candidate for MuscleMap/PVMQ validation,Fine-tuning/Training

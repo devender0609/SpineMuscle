@@ -2,14 +2,14 @@ import React,{useEffect,useMemo,useState} from 'react';
 import {UploadCloud,CheckCircle2,Activity,ShieldCheck,AlertTriangle,FileDown,RefreshCcw,ChevronRight} from 'lucide-react';
 
 const API=(import.meta.env.VITE_API_URL||'').replace(/\/$/,'');
-const api=(p,o={})=>fetch(`${API}${p}`,o).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.detail||j.error||`HTTP ${r.status}`);return j});
+const api=async(p,o={})=>{try{const r=await fetch(`${API}${p}`,o);const j=await r.json().catch(()=>({}));if(!r.ok){if(r.status===404&&!API)throw new Error('Inference service not connected. Set VITE_API_URL to the SpineMuscle inference backend.');throw new Error(j.detail||j.error||`Inference service error (${r.status})`)}return j}catch(e){if(e instanceof TypeError)throw new Error('Cannot reach the SpineMuscle inference service. Check VITE_API_URL and that the backend/tunnel is running.');throw e}};
 
 function Step({n,title,active,done}){return <div className={`step ${active?'active':''} ${done?'done':''}`}><span>{done?<CheckCircle2 size={18}/>:n}</span><b>{title}</b></div>}
 function Badge({children,tone='neutral'}){return <span className={`badge ${tone}`}>{children}</span>}
 
 export default function App(){
   const [job,setJob]=useState(null),[status,setStatus]=useState(null),[err,setErr]=useState(''),[busy,setBusy]=useState(false);
-  const [files,setFiles]=useState([]),[selected,setSelected]=useState({});
+  const [files,setFiles]=useState([]),[selected,setSelected]=useState({}),[caseId,setCaseId]=useState('');
   const stage=status?.stage||'upload';
   const stepNo=stage==='upload'?1:stage==='level_review'?2:stage==='processing'?3:stage==='complete'?4:stage==='blocked'?4:1;
 
@@ -19,7 +19,7 @@ export default function App(){
     if(!files.length)return;
     setBusy(true);setErr('');
     try{
-      const fd=new FormData(); for(const f of files)fd.append('files',f);
+      const fd=new FormData(); fd.append('case_id',caseId.trim()); for(const f of files)fd.append('files',f);
       const r=await api('/api/jobs',{method:'POST',body:fd});setJob(r.job_id);setStatus(r);
     }catch(e){setErr(e.message)}finally{setBusy(false)}
   }
@@ -28,7 +28,7 @@ export default function App(){
     try{await api(`/api/jobs/${job}/confirm-levels`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({selections:selected})});}
     catch(e){setErr(e.message)}finally{setBusy(false)}
   }
-  async function reset(){setJob(null);setStatus(null);setFiles([]);setSelected({});setErr('')}
+  async function reset(){setJob(null);setStatus(null);setFiles([]);setSelected({});setCaseId('');setErr('')}
 
   const proposals=status?.level_proposals||{};
   useEffect(()=>{if(stage==='level_review'){const x={};Object.entries(proposals).forEach(([lev,cands])=>{if(cands?.length)x[lev]=cands[0].dicom_file});setSelected(x)}},[stage,JSON.stringify(proposals)]);
@@ -48,6 +48,7 @@ export default function App(){
           <label className="button primary">Choose DICOM files<input hidden multiple type="file" onChange={e=>setFiles([...e.target.files])}/></label>
           <small>{files.length?`${files.length} files selected`:'No files selected'}</small>
         </div>
+        <div className="caseIdBox"><label>Research dataset case ID <span>optional</span></label><input value={caseId} onChange={e=>setCaseId(e.target.value)} placeholder="e.g., 0271 for internal reproducibility testing"/><small>Leave blank for a new study. Used only when a prevalidated research CSF mask exists.</small></div>
         <button className="button primary wide" disabled={!files.length||busy} onClick={start}>{busy?'Uploading…':'Start analysis'}</button>
       </section>}
 
