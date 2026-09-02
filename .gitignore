@@ -1,7 +1,11 @@
-.next/
 node_modules/
-.env*
-!.env.example
+dist/
+.env
+.env.local
+__pycache__/
+*.pyc
 .DS_Store
-
-FableLoop-Hybrid-v5/
+work/
+models/
+*.pth
+*.pt

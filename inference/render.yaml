@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: spinemuscle-inference
+    env: docker
+    plan: standard
+    healthCheckPath: /api/health
