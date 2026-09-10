@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: spinemuscle-api
+    runtime: docker
+    rootDir: inference_local
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: CORS_ORIGINS
+        value: https://spine-muscle.vercel.app
+      - key: SPINEMUSCLE_WORKDIR
+        value: /var/data/work
+      - key: SPINEMUSCLE_HOST_PIPELINE
+        value: "1"
+    disk:
+      name: spinemuscle-data
+      mountPath: /var/data
+      sizeGB: 10

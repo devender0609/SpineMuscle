@@ -1,0 +1,9 @@
+name: MuscleMap
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.14
+  - dcm2niix=1.0.20260416
+  - pip
+  - git
